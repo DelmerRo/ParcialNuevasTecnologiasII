@@ -181,7 +181,7 @@
           </tr>
         </table>
       </div>
-      <h3 v-else class="alert alert-info">No hay gastos ingresados</h3>
+      <h3 v-else class="alert alert-info">No hay gastos ingresados.</h3>
     </div>
     <span class="alert alert-info"
       >Cantidad de registros: {{ actualizarCantidadPorEstado.total }}</span
