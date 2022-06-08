@@ -10,8 +10,8 @@
             <th>Respuesta</th>
           </tr>
           <tr v-for="(respuesta, index) in respuestas" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ respuesta.respuesa }}</td>
+            <td>{{ respuesta.numero }}</td>
+            <td>{{ respuesta.respuesta }}</td>
           </tr>
         </table>
       </div>
@@ -33,9 +33,9 @@
     data () {
       return {
 respuestas: [
-  { respuesa : "a"},
-  { respuesa : "b"},
-  { respuesa : "c"},
+  { numero:1, respuesta : ["C"]},
+  { numero:2,respuesta : ["C"]},
+  { numero:3,respuesta : ["B"]},
            
 ],
       }

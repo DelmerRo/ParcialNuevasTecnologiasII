@@ -21,12 +21,6 @@
             </router-link>
           </li>
 
-          <!-- Ruta al componente HttpClient -->
-          <li class="nav-item">
-            <router-link to="/httpclient">
-              <a class="nav-link" href="#">TP4-Ejericio2</a>
-            </router-link>
-          </li>
 
            <!-- Ruta al componente Resultado -->
           <li class="nav-item">

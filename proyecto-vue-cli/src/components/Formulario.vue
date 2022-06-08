@@ -21,8 +21,8 @@
             autocomplete="off"
             v-model.trim="formData.nombre"
             required
-            :minlength="nombreMinLength"
-            :maxlength="nombreMaxLength"
+            :minlength="nombreApellidoMinLength"
+            :maxlength="nombreApellidoMaxLength"
             no-espacios
           />
 
@@ -34,11 +34,11 @@
             </div>
 
             <div slot="minlength" class="alert alert-danger mt-1">
-              Este campo requiere como mínimo {{ nombreMinLength }} caracteres.
+              Este campo requiere como mínimo {{ nombreApellidoMinLength }} caracteres.
             </div>
 
             <div slot="maxlength" class="alert alert-danger mt-1">
-              Este campo requiere como maximo {{ nombreMaxLength }} caracteres.
+              Este campo requiere como maximo {{ nombreApellidoMaxLength }} caracteres.
             </div>
 
             <div slot="no-espacios" class="alert alert-danger mt-1">
@@ -48,101 +48,83 @@
         </validate>
         <br />
 
-        <!-- --------------------- -->
-        <!--      Campo Numero De Documento       -->
+<!-- --------------------- -->
+        <!--     Campo apellido      -->
         <!-- --------------------- -->
         <validate tag="div">
           <!-- Elemento de entrada -->
-          <label for="numDoc">NumDoc</label>
+          <label for="apellido">Apellido</label>
           <input
-            type="number"
-            id="numDoc"
-            name="numDoc"
+            type="text"
+            id="apellido"
+            name="apellido"
             class="form-control"
             autocomplete="off"
-            v-model.number="formData.numDoc"
+            v-model.trim="formData.apellido"
             required
-            :min="numDocMin"
-            :max="numDocMax"
+            :minlength="nombreApellidoMinLength"
+            :maxlength="nombreApellidoMaxLength"
+            no-espacios
           />
 
           <!-- Mensajes de validación -->
-          <field-messages name="numDoc" show="$dirty">
+          <field-messages name="apellido" show="$dirty">
+            <!-- <div class="alert alert-success mt-1">Success!</div> -->
+            <div slot="required" class="alert alert-danger mt-1">
+              Campo requerido
+            </div>
+
+            <div slot="minlength" class="alert alert-danger mt-1">
+              Este campo requiere como mínimo {{ nombreApellidoMinLength }} caracteres.
+            </div>
+
+            <div slot="maxlength" class="alert alert-danger mt-1">
+              Este campo requiere como maximo {{ nombreApellidoMaxLength }} caracteres.
+            </div>
+
+            <div slot="no-espacios" class="alert alert-danger mt-1">
+              No se permiten espacios intermedios en este campo.
+            </div>
+          </field-messages>
+        </validate>
+        <br />
+
+
+        <!-- --------------------- -->
+        <!--      Campo Nota       -->
+        <!-- --------------------- -->
+        <validate tag="div">
+          <!-- Elemento de entrada -->
+          <label for="nota">Nota</label>
+          <input
+            type="number"
+            id="nota"
+            name="nota"
+            class="form-control"
+            autocomplete="off"
+            v-model.number="formData.nota"
+            required
+            :min="notaMin"
+            :max="notaMax"
+          />
+
+          <!-- Mensajes de validación -->
+          <field-messages name="nota" show="$dirty">
             <!-- <div class="alert alert-success mt-1">Success!</div> -->
             <div slot="required" class="alert alert-danger mt-1">
               Campo requerido
             </div>
             <div slot="min" class="alert alert-danger mt-1">
-              El numero de documento mínima permitida es de
-              {{ numDocMin }} años.
+             La nota ingresada debe ser mayor a
+              {{ notaMin }}.
             </div>
             <div slot="max" class="alert alert-danger mt-1">
-              El numero de documento máxima permitida es de
-              {{ numDocMax }} años.
+              La nota ingresada debe ser menor o igual a 
+              {{ notaMax }}.
             </div>
           </field-messages>
         </validate>
-        <br />
 
-        <!-- --------------------- -->
-        <!--    Campo Deuda    -->
-        <!-- --------------------- -->
-        <validate tag="div">
-          <!-- Elemento de entrada -->
-          <label for="deuda">Deuda</label>
-          <input
-            type="number"
-            id="deuda"
-            name="deuda"
-            class="form-control"
-            autocomplete="off"
-            v-model.number="formData.deuda"
-            required
-            :min="minimoValor"
-          />
-
-          <!-- Mensajes de validación -->
-          <field-messages name="deuda" show="$dirty">
-            <!-- <div class="alert alert-success mt-1">Success!</div> -->
-            <div slot="required" class="alert alert-danger mt-1">
-              Campo requerido
-            </div>
-            <div slot="min" class="alert alert-danger mt-1">
-              La Deuda Ingresada tiene que se mayor a {{ minimoValor }}.
-            </div>
-          </field-messages>
-        </validate>
-        <br />
-
-        <!-- --------------------- -->
-        <!--    Campo Total a Pagar     -->
-        <!-- --------------------- -->
-        <validate tag="div">
-          <!-- Elemento de entrada -->
-          <label for="pago">Pago</label>
-          <input
-            type="number"
-            id="pago"
-            name="pago"
-            class="form-control"
-            autocomplete="off"
-            v-model.number="formData.pago"
-            required
-            :min="minimoValor"
-          />
-
-          <!-- Mensajes de validación -->
-          <field-messages name="pago" show="$dirty">
-            <!-- <div class="alert alert-success mt-1">Success!</div> -->
-            <div slot="required" class="alert alert-danger mt-1">
-              Campo requerido
-            </div>
-            <div slot="min" class="alert alert-danger mt-1">
-              El pago Ingresada tiene que se mayor a {{ minimoValor }}.
-            </div>
-          </field-messages>
-        </validate>
-        <br />
 
         <!-- Botón de envío -->
         <button
@@ -154,38 +136,27 @@
         </button>
       </vue-form>
       <hr />
-      <br />
-      <h1>DETALLE DE GASTOS</h1>
-      <br />
-      <div v-if="gastos.length" class="table-responsive">
+      <h1>Histotial de Notas</h1>
+      <div v-if="alumnos.length" class="table-responsive">
         <table class="table table-dark">
           <tr>
-            <th>Nombre</th>
-            <th>DNI</th>
-            <th>Deuda</th>
-            <th>Pago</th>
-            <th>Fecha</th>
-            <th>Saldo</th>
+            <th>Alumno</th>
+            <th>Nota</th>
+           
           </tr>
-          <tr
-            v-for="(gasto, index) in gastos"
-            :key="index"
-            :style="{ color: analizarSaldo(gasto).color }"
-          >
-            <td>{{ gasto.nombre }}</td>
-            <td>{{ gasto.numDoc }}</td>
-            <td>{{ gasto.deuda }}</td>
-            <td>{{ gasto.pago }}</td>
-            <td>{{ gasto.fecha }}</td>
-            <td>{{ analizarSaldo(gasto).valor }}</td>
+          <tr v-for="(alumno, index) in alumnos" :key="index">
+            <td>{{ alumno.nombre +" "+ alumno.apellido }}</td>
+            <td :style="{ color: analizarNota(alumno).color }">{{ alumno.nota }}</td>
+           <!--  <td>{{ analizarNota(alumno).valor }}</td> -->
           </tr>
+          <th >PROMEDIO TOTAL</th>
+          <th :style="{ color: analizarPromedio(actualizaPromedio.promedio).color }">{{actualizaPromedio.promedio}}</th>
         </table>
       </div>
-      <h3 v-else class="alert alert-info">No hay gastos ingresados.</h3>
+      <h3 v-else class="alert alert-dark">No hay notas ingresadas</h3>
     </div>
-    <span class="alert alert-info"
-      >Cantidad de registros: {{ actualizarCantidadPorEstado.total }}</span
-    >
+  
+    
   </section>
 </template>
 
@@ -198,53 +169,68 @@ export default {
     return {
       formstate: {},
       formData: this.getInitialData(),
-      nombreMinLength: 5,
-      nombreMaxLength: 15,
-      numDocMin: 100000,
-      numDocMax: 100000000,
-      minimoValor: 0,
-      gastos: [],
+      nombreApellidoMinLength: 3,
+      nombreApellidoMaxLength: 15,
+      notaMin: 0,
+      notaMax: 10,
+      alumnos: [],
     };
   },
   methods: {
     getInitialData() {
       return {
         nombre: null,
-        Dni: null,
-        deuda: null,
-        pago: null,
+        apellido: null,
+        nota: null,
       };
     },
 
     enviar() {
-      let gasto = { ...this.formData };
-      gasto.fecha = new Date().toLocaleString();
-
-      console.log(gasto);
-      this.gastos.push(gasto);
+      let alumno = {...this.formData}
+      this.alumnos.push(alumno);
 
       this.formData = this.getInitialData();
       this.formstate._reset();
     },
-    analizarSaldo(gasto) {
-      let dif = gasto.deuda - gasto.pago;
+
+
+    analizarNota(alumno) {
+      let nota = alumno.nota 
       let color = "#080";
-      if (dif > 0) color = "#00F";
-      if (dif < 0) color = "#F00";
+      if (nota > 0 && nota<=3) color="#F00";
+      if (nota > 3 && nota<=6) color = "#FFCE30";
+      if (nota > 7 && nota<=10) color = "#008000";
+      
       return {
-        valor: dif,
         color,
       };
     },
-  },
-  computed: {
-    actualizarCantidadPorEstado() {    
-      let totalRegistros = this.gastos.length;
-      return {
-        total: totalRegistros,
+
+ analizarPromedio(promedio) {
        
+      let color = "#080";
+      if (promedio > 0 && promedio<=3) color="#F00";
+      if (promedio > 3 && promedio<=6) color = "#FFCE30";
+      if (promedio > 7 && promedio<=10) color = "#008000";
+      
+      return {
+        color,
       };
     },
+
+  },
+  computed: {
+    actualizaPromedio(){
+  let sum=0
+  for (let i = 0; i < this.alumnos.length; i++) {
+    sum += this.alumnos[i].nota;
+}
+     let cantidadNotas= this.alumnos.length
+     return{
+       
+      promedio:cantidadNotas!=0?sum/cantidadNotas:0
+      }
+    }
   },
 };
 </script>
